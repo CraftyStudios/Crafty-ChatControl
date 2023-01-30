@@ -22,6 +22,16 @@ announcements:
   - '&6This is the second announcement.' # Set infinate amount of announcements
   - '&6This is the third announcement.'
 
+
+# Help Command
+Help-Command: 
+  - 'Help!'
+  - 'Line 1'
+  - 'Line 2'
+  - '&3use color codes aswell'
+  - 'another one'
+  - 'infinate lines'
+
 # This is the config for the chat cooldown
 message-cooldown-time: 5000  # In milliseconds
 

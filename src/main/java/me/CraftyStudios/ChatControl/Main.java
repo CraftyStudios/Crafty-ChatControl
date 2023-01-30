@@ -23,6 +23,8 @@ public final class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
+      Bukkit.getPluginManager().registerEvents(this, this);
+      getCommand("deletemessage").setExecutor(this);
       saveDefaultConfig();
       saveDefaultConfig();
       Logger.log(Logger.LogLevel.OUTLINE, "------------------------------------");
@@ -54,7 +56,7 @@ public final class Main extends JavaPlugin {
       getCommand("deletemessage").setExecutor(new deletemessage(this));
       getCommand("mute").setExecutor(new mute(this));
       getCommand("unmute").setExecutor(new unmute(this));
-
+      getCommand("help").setExecutor(new help(this));
       getCommand("lockdown").setExecutor(new lockdown(this));
       getCommand("unlockdown").setExecutor(new unlockdown(this));
       getCommand("ccgui").setExecutor(new ccgui(this));

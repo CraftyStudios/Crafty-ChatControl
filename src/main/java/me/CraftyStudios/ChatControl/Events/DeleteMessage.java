@@ -18,12 +18,6 @@ import net.md_5.bungee.api.chat.hover.content.Text;
 
 public class DeleteMessage extends JavaPlugin implements Listener {
 
-  @Override
-  public void onEnable() {
-    Bukkit.getPluginManager().registerEvents(this, this);
-    getCommand("deletemessage").setExecutor(this);
-  }
-
   @EventHandler
   public void onPlayerChat(AsyncPlayerChatEvent event) {
     String message = event.getMessage();
@@ -35,10 +29,14 @@ public class DeleteMessage extends JavaPlugin implements Listener {
 
     
     for (Player online : Bukkit.getOnlinePlayers()) {
-      if (online.hasPermission("CraftyChatControl.message.view")) {
-        online.spigot().sendMessage(ChatMessageType.CHAT, messageComponent);
+      if (plugin.getConfig().getBoolean("DeleteMessage") == true) {
+        if (online.hasPermission("CraftyChatControl.message.delete")) {
+          online.spigot().sendMessage(ChatMessageType.CHAT, messageComponent);
+        } else {
+          online.sendMessage(ChatColor.RESET + message);
+        }
       } else {
-        online.sendMessage(ChatColor.GRAY + "[X] " + ChatColor.RESET + message);
+        online.sendMessage(ChatColor.RESET + message);
       }
     }
   }
