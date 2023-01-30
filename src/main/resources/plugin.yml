@@ -1,0 +1,70 @@
+name: Crafty-ChatControl 
+version: 1.0
+main: me.CraftyStudios.ChatControl.Main
+depennd: [WorldGuard, Vault, WorldEdit, WGRegionEvents]
+commands:
+  ccreload:
+    description: Reload the config
+    usage: '/ccreload'
+    aliases: [ccr, ccreload]
+    permission: CraftyChatControl.reload
+    permission-message: You do not have permission to use this command
+  ccgui:
+    description: Manages AFK regions
+    usage: '/afkregion'
+    permission: afk.regions
+    permission-message: You do not have permission to use this command
+  afkreload:
+    description: Reloads the config
+    usage: '/afkreload'
+    permission: afk.reload
+    permission-message: You do not have permission to use this command
+  cchelp: 
+    description: Shows the help menu
+    usage: '/cchelp'
+    aliases: [cch, cchelp]
+    permission: CraftyChatControl.help
+    permission-message: You do not have permission to use this command
+  CustomCommand:
+    description: Custom command
+    usage: '/<custom_command>'
+    permission: CraftyChatControl.CustomCommand
+    permission-message: You do not have permission to use this command
+  DeleteMessageCommand:
+    description: Deletes a message
+    usage: '/deletemessage <message>'
+    permission: CraftyChatControl.DeleteMessageCommand
+    permission-message: You do not have permission to use this command
+  Lockdown:
+    description: Locks down the chat
+    usage: '/lockdown'
+    permission: CraftyChatControl.Lockdown
+    permission-message: You do not have permission to use this command
+  Unlock:
+    description: Unlocks the chat
+    usage: '/unlockdown'
+    permission: CraftyChatControl.Unlock
+    permission-message: You do not have permission to use this command
+  Mute:
+    description: Mutes a player
+    usage: '/mute <player>'
+    permission: CraftyChatControl.Mute
+    permission-message: You do not have permission to use this command
+  Unmute:
+    description: Unmutes a player
+    usage: '/unmute <player>'
+    permission: CraftyChatControl.Unmute
+    permission-message: You do not have permission to use this command
+  NicknameSystem:
+    description: Changes your nickname
+    usage: '/nickname <nickname>'
+    permission: CraftyChatControl.NicknameSystem
+    permission-message: You do not have permission to use this command
+  tempmute:
+    description: Temporarily mutes a player
+    usage: '/tempmute <player> <time>'
+    permission: CraftyChatControl.tempmute
+    permission-message: You do not have permission to use this command
+  
+  
+

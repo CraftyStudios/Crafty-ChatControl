@@ -1,0 +1,83 @@
+# MAIN CONFIG FILE FOR CRAFTY CHAT CONTROL
+
+
+# These are the messages that are sent to the player when they use the command
+prefix: '&7[&bCrafty Chat Control&7]'
+no-permission: '&cYou do not have permission to use this command'
+reload: '&aSuccessfully reloaded the config!'
+MainGUI-Title: '&7Server Dashboard | Chat Control'
+MainGUI-ChatLockedDown-Name: '&cLocked'
+MainGUI-ChatLockedDown-Lore:
+  - '&7Chat is currently locked'
+  - '&eClick to toggle'
+MainGUI-ChatNotLockedDown-Name: '&aUnlocked'
+MainGUI-ChatNotLockedDown-Lore:
+  - '&7Chat is not currently locked'
+  - '&eClick to toggle'
+
+# This is the config for auto announcements
+announcement-interval: 60 # In seconds until the next announcement
+announcements:
+  - '&6This is the first announcement.' # Use \n for new lines
+  - '&6This is the second announcement.' # Set infinate amount of announcements
+  - '&6This is the third announcement.'
+
+# This is the config for the chat cooldown
+message-cooldown-time: 5000  # In milliseconds
+
+#Custom Commands
+commands:
+  <command_name>:
+    - "<first line of message>"
+    - "<second line of message>"
+  <another_command_name>:
+    - "<first line of message>"
+    - "<second line of message>"
+
+
+
+# This is the config for the swear filter
+swear-words:
+  - 'swear1'
+  - 'swear2'
+  - 'swear3' 
+
+# To add more words, follow this format:
+#
+#  - 'swearWord'
+#
+
+swear-message-warning: '&cNo Swearing!'
+
+hash-swear-words: true # True or False
+# Hashing is replacing the word with ***
+# For instance, if someone says a blacklisted 4 letter word, their message would look like this:
+# **** the rules!
+# If it is false, the message would just be deleted.
+
+
+# This is the config for message character limits
+message-length-limit-enabled: false # True or False
+max-message-length: 50 # Max Minecraft message length is 256 characters
+message-length-limit-message: '&cYour message is too long!'
+
+# This is the config for the auto responder
+keywords:
+  - hello
+  - hi
+  - greetings
+responses:
+  hello: Hello there!
+  hi: Hi!
+  greetings: Greetings!
+response-color-autoresponder: GOLD
+
+# This is the config for nicknames
+nickname-removed-message: '&aYour nickname has been removed!'
+nickname-set-message: '&aYour nickname has been set to' # This is programmed to append the nickname to the end of the message
+nickname-removed-message-color: '&6' # Minecraft color codes only
+nickname-set-message-color: '&6' # Minecraft color codes only
+
+# This is the config for the URL Blocker
+URLBlocker-Message: '&cNo URLs Allowed!'
+
