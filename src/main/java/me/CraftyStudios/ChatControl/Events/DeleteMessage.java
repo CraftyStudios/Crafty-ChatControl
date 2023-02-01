@@ -17,12 +17,17 @@ import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.chat.hover.content.Text;
 
 public class DeleteMessage extends JavaPlugin implements Listener {
+  private final JavaPlugin plugin;
+
+  public DeleteMessage(JavaPlugin plugin) {
+      this.plugin = plugin;
+  }
 
   @EventHandler
   public void onPlayerChat(AsyncPlayerChatEvent event) {
     String message = event.getMessage();
     
-    TextComponent messageComponent = new TextComponent(ChatColor.RED + "[X] " + ChatColor.RESET + message);
+    TextComponent messageComponent = new TextComponent(ChatColor.GRAY + "[" + ChatColor.RED + "X" + ChatColor.GRAY + "] " + ChatColor.RESET + message);
     messageComponent.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/deletemessage " + message));
     messageComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text("Click to delete this message")));
 

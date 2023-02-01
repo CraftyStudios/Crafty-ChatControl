@@ -1,9 +1,11 @@
 package me.CraftyStudios.ChatControl;
 
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import me.CraftyStudios.ChatControl.utils.Logger;
 import me.CraftyStudios.ChatControl.Commands.*;
+import me.CraftyStudios.ChatControl.Events.DeleteMessage;
 import me.CraftyStudios.ChatControl.GUIs.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,7 +14,10 @@ import java.util.Map;
 
 public final class Main extends JavaPlugin {
   public static String prefix;
-  private Map<String, Long> mutedPlayers;
+  Map<String, Long> mutedPlayers;
+  Map<String, Boolean> lockdownStatus = new HashMap<>();
+  Map<Player, String> messages;
+
 
 
 
@@ -23,7 +28,7 @@ public final class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
-      Bukkit.getPluginManager().registerEvents(this, this);
+
       getCommand("deletemessage").setExecutor(this);
       saveDefaultConfig();
       saveDefaultConfig();
@@ -50,15 +55,15 @@ public final class Main extends JavaPlugin {
       // Commands
       //getCommand("<command_name>").setExecutor(new CustomCommand(this));
       //getCommand("<command_name>").setTabCompleter(new CustomCommand(this));
-      
+      getCommand("edit").setExecutor(new Edit(messages, this));
       getCommand("cchelp").setExecutor(new cchelp(this));
       getCommand("ccreload").setExecutor(new ccreload(this));
-      getCommand("deletemessage").setExecutor(new deletemessage(this));
+      getCommand("deletemessage").setExecutor(new DeleteMessage(this));
       getCommand("mute").setExecutor(new mute(this));
-      getCommand("unmute").setExecutor(new unmute(this));
+      getCommand("unmute").setExecutor(new unmute(mutedPlayers, this));
       getCommand("help").setExecutor(new help(this));
       getCommand("lockdown").setExecutor(new lockdown(this));
-      getCommand("unlockdown").setExecutor(new unlockdown(this));
+      getCommand("unlockdown").setExecutor(new unlockdown(this, lockdownStatus, "prefix"));
       getCommand("ccgui").setExecutor(new ccgui(this));
       
       // Events

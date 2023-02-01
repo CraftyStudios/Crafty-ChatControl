@@ -91,3 +91,14 @@ nickname-set-message-color: '&6' # Minecraft color codes only
 # This is the config for the URL Blocker
 URLBlocker-Message: '&cNo URLs Allowed!'
 
+# This is the config for the on join and leave messages
+
+on-join-message: '&7Welcolme to the server ' # This is programmed to append the player's name to the end of the message
+
+# This is the config for the anti caps lock
+
+antiCapsLock:
+  minLength: 5 # Minimum length of message to check for caps lock
+  minCaps: 3 # Minimum amount of caps in message for moderation
+  minCapsRatio: 50 # Minimum ratio of caps to message length for moderation (in this case it is 50%)
+  message: '&cNo Caps Lock!'
