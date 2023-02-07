@@ -1,6 +1,7 @@
 package me.CraftyStudios.ChatControl;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import me.CraftyStudios.ChatControl.utils.Logger;
@@ -11,12 +12,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-
 public final class Main extends JavaPlugin {
   public static String prefix;
   Map<String, Long> mutedPlayers;
   Map<String, Boolean> lockdownStatus = new HashMap<>();
   Map<Player, String> messages;
+  public static String noPermission;
 
 
 
@@ -28,6 +29,11 @@ public final class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
+
+      noPermission = getConfig().getString("no-permission");
+      noPermission = ChatColor.translateAlternateColorCodes('&', noPermission);
+      
+      // Plugin startup logic
 
       getCommand("deletemessage").setExecutor(this);
       saveDefaultConfig();

@@ -2,14 +2,13 @@ package me.CraftyStudios.ChatControl.Commands;
 
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.ChatColor;
 import org.bukkit.boss.BossBar;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
 
-public class announce extends CommandExecutor {
+public class announce extends JavaPlugin {
 
   private final JavaPlugin plugin;
 
