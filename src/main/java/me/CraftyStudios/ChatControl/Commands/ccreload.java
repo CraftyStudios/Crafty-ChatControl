@@ -3,8 +3,10 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import me.CraftyStudios.ChatControl.Main;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +42,8 @@ public class ccreload implements CommandExecutor, TabCompleter {
                     plugin.reloadConfig();
                     return true;
                 } else {
-                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Prefix") + plugin.getConfig().getString("no-permission")));
+                    Player player = (Player) sender;
+                    player.getPlayer().sendMessage(Main.noPermission);
             }
         }return false;
     }

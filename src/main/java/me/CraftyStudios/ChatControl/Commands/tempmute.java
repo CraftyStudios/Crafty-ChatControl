@@ -1,6 +1,7 @@
 package me.CraftyStudios.ChatControl.Commands;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -62,10 +63,13 @@ public class tempmute implements CommandExecutor, TabCompleter, Listener {
         sender.sendMessage(plugin.getConfig().getString("prefix") + "Invalid time.");
         return false;
       }
-
+      Player player = (Player) sender;
       long endTime = System.currentTimeMillis() + (time * 60 * 1000);
       mutedPlayers.put(target.getName(), endTime);
-      sender.sendMessage(plugin.getConfig().getString("prefix") + target.getName() + " has been temporarily muted for " + time + " minutes.");
+      String targetPlayer = target.getName(); 
+      String muteMessage = plugin.getConfig().getString("mute-message").replace("{target}", targetPlayer).replace("{time}", args[1]);
+      muteMessage = ChatColor.translateAlternateColorCodes('&', muteMessage);
+      player.getPlayer().sendMessage(muteMessage);
       return true;
     }
     return false;
@@ -75,10 +79,15 @@ public class tempmute implements CommandExecutor, TabCompleter, Listener {
   public void onPlayerChat(AsyncPlayerChatEvent event) {
     long endTime = mutedPlayers.getOrDefault(event.getPlayer().getName(), 0L);
     if (endTime > System.currentTimeMillis()) {
-      event.getPlayer().sendMessage("You are temporarily muted and cannot chat.");
+      Player player = (Player) event.getPlayer();
+      var remainingTime = (endTime - System.currentTimeMillis()) / 1000;
+      String mutedMessage = plugin.getConfig().getString("muted-message").replace("{remainingtime}", String.valueOf(remainingTime));
+      mutedMessage = ChatColor.translateAlternateColorCodes('&', mutedMessage);
+      player.getPlayer().sendMessage(mutedMessage);
       event.setCancelled(true);
     } else if (endTime > 0) {
       mutedPlayers.remove(event.getPlayer().getName());
+      event.setCancelled(false);
     }
   }
 }

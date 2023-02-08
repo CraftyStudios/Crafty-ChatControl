@@ -9,6 +9,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import me.CraftyStudios.ChatControl.Main;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -27,8 +28,11 @@ public class mute implements CommandExecutor, TabCompleter, Listener {
     private final Set<String> mutedPlayers = new HashSet<>();
         @EventHandler
             public void onPlayerChat(AsyncPlayerChatEvent event) {
+                Player player = event.getPlayer();
               if (mutedPlayers.contains(event.getPlayer().getName())) {
-                event.getPlayer().sendMessage("You are muted and cannot chat.");
+                String message = plugin.getConfig().getString("mute-message");
+                message = ChatColor.translateAlternateColorCodes('&', message);
+                player.getPlayer().sendMessage(plugin.getConfig().getString("prefix") + message);
                 event.setCancelled(true);
 
               }
@@ -77,7 +81,8 @@ public class mute implements CommandExecutor, TabCompleter, Listener {
                       return true;
                     }
                 } else {
-                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Prefix") + plugin.getConfig().getString("no-permission")));
+                    Player player = (Player) sender;
+                    player.getPlayer().sendMessage(Main.noPermission);
                 }return false;
                 }
             }

@@ -32,17 +32,17 @@ public boolean onCommand(CommandSender sender, Command command, String label, St
         // Remove the player's nickname
         nicknames.remove(player);
         player.setDisplayName(player.getName());
-        String response = plugin.getConfig().getString("nickname-removed-message");
-        String colorCode = plugin.getConfig().getString("nickname-removed-message-color");
-        player.sendMessage(ChatColor.valueOf(colorCode) + response);
-    } else {
+        String response = plugin.getConfig().getString("nickname-reset-message");
+        response = ChatColor.translateAlternateColorCodes('&', response);
+        player.getPlayer().sendMessage(response);
+    } else if (args.length == 1) {
+        String nickname = args[0];
         // Set the player's nickname
-        String nickname = ChatColor.translateAlternateColorCodes('&', String.join(" ", args));
+        String newNickMessage = plugin.getConfig().getString("nickname-set-message");
+        newNickMessage = ChatColor.translateAlternateColorCodes('&', newNickMessage);
+        player.sendMessage(newNickMessage);
         nicknames.put(player, nickname);
         player.setDisplayName(nickname);
-        String response = plugin.getConfig().getString("nickname-set-message");
-        String colorCode = plugin.getConfig().getString("nickname-set-message-color");
-        player.sendMessage(ChatColor.valueOf(colorCode) + response + nickname);
     }
     
     // Update the player list
@@ -55,4 +55,5 @@ public boolean onCommand(CommandSender sender, Command command, String label, St
 	return false;
 
 }
+
 }
