@@ -1,8 +1,12 @@
 package me.CraftyStudios.ChatControl.Commands;
 
 import org.bukkit.plugin.java.JavaPlugin;
+
+import me.CraftyStudios.ChatControl.Main;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.bukkit.ChatColor;
 import org.bukkit.boss.BossBar;
 import org.bukkit.boss.BarColor;
@@ -19,14 +23,11 @@ public class announce extends JavaPlugin {
   @Override
   public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
     if (!sender.hasPermission("announce.use")) {
-      sender.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("noPermissionMessage")));
+      Player player = (Player) sender;
+      player.getPlayer().sendMessage(Main.noPermission);
       return true;
     }
-    
-    if (args.length == 0) {
-      sender.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("noMessageProvidedMessage")));
-      return true;
-    }
+    else {
     
     String message = ChatColor.translateAlternateColorCodes('&', String.join(" ", args));
     plugin.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("broadcastMessage").replace("{message}", message)));
@@ -43,4 +44,5 @@ public class announce extends JavaPlugin {
     });
     return true;
   }
+}
 }
