@@ -10,16 +10,29 @@ import org.bukkit.ChatColor;
 
 public class onJoinMessages extends JavaPlugin implements Listener {
     public JavaPlugin plugin;
+
+    public boolean modelEnabled() {
+      return plugin.getConfig().getBoolean("join-messages-enabled");
+    }
   @Override
   public void onEnable() {
     Bukkit.getServer().getPluginManager().registerEvents(this, this);
   }
   
+// Boolean to check if model is enabled in config
+  
+
   @EventHandler
   public void onPlayerJoin(PlayerJoinEvent event) {
+    if (modelEnabled() == true) {
     Player player = event.getPlayer();
-    player.sendMessage(
-        ChatColor.translateAlternateColorCodes('&', 
-        plugin.getConfig().getString("join-message")));
+    String joinMessage = plugin.getConfig().getString("join-message");
+    joinMessage = ChatColor.translateAlternateColorCodes('&', joinMessage).replace("{player}", player.getName());
+    Bukkit.broadcastMessage(joinMessage);
+        
   }
+  else {
+    return;
+  }
+}
 }

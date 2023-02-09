@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -45,21 +46,27 @@ public class unmute implements CommandExecutor, TabCompleter {
         String targetName = args[0];
         Player target = Bukkit.getPlayer(targetName);
         if (target == null) {
-            sender.sendMessage(
-                    plugin.getConfig().getString("prefix") + targetName + " is not online.");
-            return false;
+        Player player = (Player) sender;
+        String invalidPlayer = plugin.getConfig().getString("invalid-player-tempmute").replace("{player}", targetName);
+        invalidPlayer = ChatColor.translateAlternateColorCodes('&', invalidPlayer);
+        player.getPlayer().sendMessage(invalidPlayer);
+        return false;
         }
 
         String targetUUID = target.getUniqueId().toString();
         if (!mutedPlayers.containsKey(targetUUID)) {
-            sender.sendMessage(
-                    plugin.getConfig().getString("prefix") + targetName + " is not muted.");
-            return false;
+        Player player = (Player) sender;
+        String notMuted = plugin.getConfig().getString("not-muted-tempmute").replace("{player}", targetName);
+        notMuted = ChatColor.translateAlternateColorCodes('&', notMuted);
+        player.getPlayer().sendMessage(notMuted);
+        return false;
         }
 
         mutedPlayers.remove(targetUUID);
-        sender.sendMessage(
-                plugin.getConfig().getString("prefix") + targetName + " has been unmuted.");
+        Player player = (Player) sender;
+        String unmuted = plugin.getConfig().getString("unmuted-tempmute").replace("{player}", targetName);
+        unmuted = ChatColor.translateAlternateColorCodes('&', unmuted);
+        player.getPlayer().sendMessage(unmuted);
         return true;
     }
 }

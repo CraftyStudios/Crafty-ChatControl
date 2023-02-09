@@ -19,6 +19,10 @@ public class messageLimiter implements Listener {
         if (plugin.getConfig().getBoolean("message-length-limit-enabled")) {
             if (!p.hasPermission("chatcontrol.bypass.message-length-limit")) {
                 if (message.length() > plugin.getConfig().getInt("max-message-length")) {
+                    Player player = (Player) p;
+                    String messageLengthLimitMessage = plugin.getConfig().getString("message-length-limit-message");
+                    messageLengthLimitMessage = ChatColor.translateAlternateColorCodes('&', messageLengthLimitMessage).replace("{max-message-length}", String.valueOf(plugin.getConfig().getInt("max-message-length")));
+                    player.getPlayer().sendMessage(messageLengthLimitMessage);
                  e.setCancelled(true);
                     p.sendMessage(ChatColor.RED + plugin.getConfig().getString("message-length-limit-message"));
             }
