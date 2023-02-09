@@ -10,6 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import me.CraftyStudios.ChatControl.Main;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.HoverEvent;
@@ -54,7 +55,7 @@ public class DeleteMessage extends JavaPlugin implements Listener {
     }
     Player player = (Player) sender;
     if (!player.hasPermission("CraftyChatControl.message.delete")) {
-      player.sendMessage(ChatColor.RED + "You don't have permission to use this command.");
+      player.getPlayer().sendMessage(Main.noPermission);
       return true;
     }
     if (args.length == 0) {

@@ -14,20 +14,27 @@ public class URLBlocker implements Listener {
     }
 
       private static final String URL_REGEX = "(?:(?:https?|ftp|file)://|www\\.|ftp\\.)[-A-Z0-9+&@#/%=_|$?!:,.]*[A-Z0-9+&@#/%=_|$]|(?<![A-Za-z0-9])\\.[A-Za-z]{2,}(?![A-Za-z0-9])";
-
+// Boolean to check if model is enabled in config
+    public boolean isEnabled() {
+        return plugin.getConfig().getBoolean("url-blocker-enabled");
+    }
     @EventHandler
     public void onChat(AsyncPlayerChatEvent event) {
+        if (isEnabled() == true) {
         Player player = event.getPlayer();
         String message = event.getMessage();
         
         if (!player.hasPermission("chatcontrol.urlblocker.bypass")) {
        
         if (message.matches(URL_REGEX)) {
-            player.sendMessage(plugin.getConfig().getString("URLBlocker-Message"));
+            String urlBlockerMessage = plugin.getConfig().getString("url-blocker-message");
+            urlBlockerMessage = urlBlockerMessage.replace("{player}", player.getName());
+            player.sendMessage(urlBlockerMessage);
             event.setCancelled(true);
         }
         }
     }
+}
 }
 
 

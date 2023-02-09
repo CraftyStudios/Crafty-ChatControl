@@ -20,6 +20,7 @@ public class announce extends JavaPlugin {
     this.plugin = plugin;
   }
 
+  
   @Override
   public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
     if (!sender.hasPermission("announce.use")) {

@@ -30,8 +30,15 @@ public void loadConfig() {
     }
 }
 
+// Boolean to check if the model is enabled in config
+public boolean isEnabled() {
+    return plugin.getConfig().getBoolean("autoresponder-enabled");
+}
+
 @EventHandler
 public void onChat(AsyncPlayerChatEvent e, Player player) {
+    if (isEnabled() == true) {
+
     // Get the message
     String message = e.getMessage();
     
@@ -44,5 +51,9 @@ public void onChat(AsyncPlayerChatEvent e, Player player) {
                 break;
         }
     }
+}
+else {
+    return;
+}
 }
 }
