@@ -17,7 +17,7 @@ import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.chat.hover.content.Text;
 
-public class DeleteMessage extends JavaPlugin implements Listener {
+public class DeleteMessage implements Listener {
   private final JavaPlugin plugin;
 
   public DeleteMessage(JavaPlugin plugin) {
@@ -47,7 +47,6 @@ public class DeleteMessage extends JavaPlugin implements Listener {
     }
   }
 
-  @Override
   public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
     if (!(sender instanceof Player)) {
       sender.sendMessage("This command can only be used by players.");

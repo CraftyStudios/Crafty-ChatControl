@@ -14,13 +14,16 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class ChatLogger extends JavaPlugin implements Listener {
+public class ChatLogger implements Listener {
 
     private long messageId = 0;
+    private JavaPlugin plugin;
+
+    
  
-    @Override
-    public void onEnable() {
-      getServer().getPluginManager().registerEvents(this, this);
+    public ChatLogger(JavaPlugin plugin) {
+      plugin.getServer().getPluginManager().registerEvents(this, plugin);
+      this.plugin = plugin;
     }
    
     @EventHandler
@@ -30,7 +33,7 @@ public class ChatLogger extends JavaPlugin implements Listener {
    
       // Write the message to the file
       try {
-        File file = new File(getDataFolder(), "chat-log.txt");
+        File file = new File(plugin.getDataFolder(), "chat-log.txt");
         if (!file.exists()) {
           file.createNewFile();
         }
@@ -42,7 +45,7 @@ public class ChatLogger extends JavaPlugin implements Listener {
         e.printStackTrace();
       }
     }
-@Override 
+ 
 public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
     if (!(sender instanceof Player)) {
         sender.sendMessage("This command can only be run by a player.");
@@ -73,7 +76,7 @@ public boolean onCommand(CommandSender sender, Command command, String label, St
       }
    
       try {
-        File file = new File(getDataFolder(), "chat-log.txt");
+        File file = new File(plugin.getDataFolder(), "chat-log.txt");
         if (!file.exists()) {
           player.sendMessage("No chat log file found.");
           return false;

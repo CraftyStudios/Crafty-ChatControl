@@ -13,7 +13,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class DeathMessageListener implements Listener {;
    private FileConfiguration config;
-private JavaPlugin plugin;
+    JavaPlugin plugin;
 
    public DeathMessageListener(JavaPlugin plugin) {
       this.plugin = plugin;

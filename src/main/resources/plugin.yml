@@ -1,23 +1,14 @@
 name: Crafty-ChatControl 
 version: 1.0
+depend: [PlaceholderAPI]
+api-version: 1.19
 main: me.CraftyStudios.ChatControl.Main
-depennd: [WorldGuard, Vault, WorldEdit, WGRegionEvents]
 commands:
   ccreload:
     description: Reload the config
     usage: '/ccreload'
     aliases: [ccr, ccreload]
     permission: CraftyChatControl.reload
-    permission-message: You do not have permission to use this command
-  ccgui:
-    description: Manages AFK regions
-    usage: '/afkregion'
-    permission: afk.regions
-    permission-message: You do not have permission to use this command
-  afkreload:
-    description: Reloads the config
-    usage: '/afkreload'
-    permission: afk.reload
     permission-message: You do not have permission to use this command
   cchelp: 
     description: Shows the help menu
@@ -65,6 +56,17 @@ commands:
     usage: '/tempmute <player> <time>'
     permission: CraftyChatControl.tempmute
     permission-message: You do not have permission to use this command
+  edit: 
+    description: Edits a message
+    usage: '/edit <message>'
+    permission: CraftyChatControl.edit
+    permission-message: You do not have permission to use this command
+  CCGui:
+    description: Opens the GUI
+    usage: '/ccgui'
+    permission: CraftyChatControl.CCGui
+    permission-message: You do not have permission to use this command
+  
   
   
 

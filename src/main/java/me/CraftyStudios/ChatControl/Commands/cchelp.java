@@ -14,7 +14,7 @@ import java.util.List;
 import org.bukkit.ChatColor;
 
 public class cchelp implements CommandExecutor, TabCompleter {
-    private final JavaPlugin plugin;
+    JavaPlugin plugin;
 
     public cchelp(JavaPlugin plugin) {
         this.plugin = plugin;
